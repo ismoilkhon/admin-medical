@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import logoAdmin from '../../long.png'
+import { blue, pink } from '@mui/material/colors'
 import MailIcon from '@mui/icons-material/Mail'
 import MenuIcon from '@mui/icons-material/Menu'
 import Typography from '@mui/material/Typography'
@@ -7,6 +8,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import CssBaseline from '@mui/material/CssBaseline'
 import MoreIcon from '@mui/icons-material/MoreVert'
 import { styled, alpha } from '@mui/material/styles'
+import LogoutIcon from '@mui/icons-material/Logout'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import InboxIcon from '@mui/icons-material/MoveToInbox'
@@ -72,6 +74,20 @@ export const Welcome = (props) => {
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
     };
+    const handleDrawerClose = () => {
+        setIsClosing(true)
+        setMobileOpen(false)
+    }
+
+    const handleDrawerTransitionEnd = () => {
+        setIsClosing(false)
+    }
+
+    const handleDrawerToggle = () => {
+        if (!isClosing) {
+            setMobileOpen(!mobileOpen)
+        }
+    }
 
     const handleMobileMenuClose = () => {
         setMobileMoreAnchorEl(null);
@@ -108,20 +124,6 @@ export const Welcome = (props) => {
         </Menu>
     );
 
-    const handleDrawerClose = () => {
-        setIsClosing(true)
-        setMobileOpen(false)
-    }
-
-    const handleDrawerTransitionEnd = () => {
-        setIsClosing(false)
-    }
-
-    const handleDrawerToggle = () => {
-        if (!isClosing) {
-            setMobileOpen(!mobileOpen)
-        }
-    }
     const drawer = (
         <div>
             <Toolbar>
@@ -129,10 +131,10 @@ export const Welcome = (props) => {
             </Toolbar>
 
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                {['Bosh Saxifa', 'Palatalar', 'Shifokorlar', 'Bemorlar', 'Bo\'limlar'].map((text, index) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton>
-                            <ListItemIcon>
+                            <ListItemIcon sx={{ color: blue[500] }}>
                                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                             </ListItemIcon>
                             <ListItemText primary={text} />
@@ -140,18 +142,18 @@ export const Welcome = (props) => {
                     </ListItem>
                 ))}
             </List>
+            <Toolbar />
             <Divider />
             <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
+
+
+                <ListItemButton>
+                    <ListItemIcon>
+                        <LogoutIcon sx={{ color: pink[500] }} />
+                    </ListItemIcon>
+                    <ListItemText secondary='Tizimdan chiqish' />
+                </ListItemButton>
+
             </List>
         </div>
     )
